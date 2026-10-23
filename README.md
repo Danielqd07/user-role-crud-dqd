@@ -1,4 +1,4 @@
-# UD3 User Role CRUD
+# User Role CRUD
 
 Proyecto desarrollado con Spring Boot para gestionar usuarios y roles mediante una relación muchos a muchos.
 
