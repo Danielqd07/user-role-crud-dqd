@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head('User Role CRUD - Roles')"></head>
+
+<body class="d-flex flex-column h-100">
+
+<header th:replace="fragments/header :: header"></header>
+
+<main class="list-page">
+
+    <div class="list-card">
+
+        <h1>Listado de Roles</h1>
+
+        <a th:href="@{/roles/new}"
+           class="btn btn-success">
+            Agregar Nuevo Rol
+        </a>
+
+        <div th:if="${errorMessage}"
+             class="alert alert-danger"
+             th:text="${errorMessage}">
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-striped mt-3">
+
+                <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="role : ${listRoles}">
+
+                    <td th:text="${role.id}"></td>
+
+                    <td th:text="${role.name}"></td>
+
+                    <td>
+
+                        <a th:href="@{/roles/edit(id=${role.id})}"
+                           class="btn btn-primary btn-sm">
+                            Editar
+                        </a>
+
+                        <form th:action="@{/roles/delete}"
+                              method="post"
+                              class="d-inline">
+
+                            <input type="hidden"
+                                   name="id"
+                                   th:value="${role.id}">
+
+                            <button type="submit"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('¿Estás seguro de eliminar este rol?')">
+                                Eliminar
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</main>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>

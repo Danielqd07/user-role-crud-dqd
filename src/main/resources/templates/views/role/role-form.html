@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head('User Role CRUD - Rol')"></head>
+
+<body class="d-flex flex-column h-100">
+
+<header th:replace="fragments/header :: header"></header>
+
+<main class="form-page">
+
+    <div class="form-card">
+
+        <h1 th:text="${role.id == null}
+                ? 'Agregar nuevo rol'
+                : 'Editar rol'">
+        </h1>
+
+        <div th:if="${errorMessage}"
+             class="alert alert-danger"
+             th:text="${errorMessage}">
+        </div>
+
+        <form th:action="${role.id == null}
+                ? @{/roles/insert}
+                : @{/roles/update}"
+              th:object="${role}"
+              method="post">
+
+            <input type="hidden"
+                   th:field="*{id}">
+
+            <div class="mb-3">
+
+                <label for="name"
+                       class="form-label">
+                    Nombre
+                </label>
+
+                <input type="text"
+                       id="name"
+                       th:field="*{name}"
+                       class="form-control">
+
+                <div th:if="${#fields.hasErrors('name')}"
+                     th:errors="*{name}"
+                     class="text-danger">
+                </div>
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary"
+                    th:text="${role.id == null}
+                            ? 'Crear'
+                            : 'Actualizar'">
+            </button>
+
+            <a th:href="@{/roles}"
+               class="btn btn-secondary">
+                Volver
+            </a>
+
+        </form>
+
+    </div>
+
+</main>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>

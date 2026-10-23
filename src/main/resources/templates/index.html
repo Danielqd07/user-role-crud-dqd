@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head('User Role CRUD')"></head>
+
+<body class="d-flex flex-column h-100">
+
+<header th:replace="fragments/header :: header"></header>
+
+<main class="d-flex flex-column justify-content-center align-items-center text-center p-4">
+
+    <h1 class="mb-4">
+        User Role CRUD
+    </h1>
+
+    <p class="mb-4">
+        Gestión de usuarios y roles con Spring Boot.
+    </p>
+
+    <div class="d-flex gap-3">
+
+        <a th:href="@{/users}"
+           class="btn btn-primary">
+            Usuarios
+        </a>
+
+        <a th:href="@{/roles}"
+           class="btn btn-secondary">
+            Roles
+        </a>
+
+    </div>
+
+</main>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>

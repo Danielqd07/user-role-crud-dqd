@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head('User Role CRUD - Usuarios')"></head>
+
+<body class="d-flex flex-column h-100">
+
+<header th:replace="fragments/header :: header"></header>
+
+<main class="list-page">
+
+    <div class="list-card">
+
+        <h1>Listado de Usuarios</h1>
+
+        <a th:href="@{/users/new}"
+           class="btn btn-success">
+            Agregar Nuevo Usuario
+        </a>
+
+        <div th:if="${errorMessage}"
+             class="alert alert-danger"
+             th:text="${errorMessage}">
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-striped mt-3">
+
+                <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Acciones</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="user : ${listUsers}">
+
+                    <td th:text="${user.id}"></td>
+
+                    <td th:text="${user.username}"></td>
+
+                    <td th:text="${user.email}"></td>
+
+                    <td>
+
+                        <span th:each="role, iterStat : ${user.roles}">
+
+                            <span th:text="${role.name}"></span>
+
+                            <span th:if="${!iterStat.last}">
+                                ,
+                            </span>
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <a th:href="@{/users/edit(id=${user.id})}"
+                           class="btn btn-primary btn-sm">
+                            Editar
+                        </a>
+
+                        <form th:action="@{/users/delete}"
+                              method="post"
+                              class="d-inline">
+
+                            <input type="hidden"
+                                   name="id"
+                                   th:value="${user.id}">
+
+                            <button type="submit"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('¿Estás seguro de eliminar este usuario?')">
+                                Eliminar
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</main>
+
+<footer th:replace="fragments/footer :: footer"></footer>
+
+<div th:replace="fragments/scripts :: scripts"></div>
+
+</body>
+</html>
